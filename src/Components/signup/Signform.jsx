@@ -86,7 +86,7 @@ import {
                   </FormControl>        
               <FormControl id="name">
                 <FormLabel> Full Name</FormLabel>
-                <Input type="text" name="name" onChange={handlechange}  isRequired="true" />
+                <Input type="text" name="name" onChange={handlechange}  />
               </FormControl>
               <FormControl id="email" >
                 <FormLabel> Work Email</FormLabel>
@@ -94,7 +94,7 @@ import {
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" name="password" onChange={handlechange}  isRequired="true"/>
+                <Input type="password" name="password" onChange={handlechange} />
               </FormControl>
               <Stack spacing={10}>
               <Stack align={'center'}>

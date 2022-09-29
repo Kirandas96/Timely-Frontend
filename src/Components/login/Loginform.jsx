@@ -90,11 +90,11 @@ import { useNavigate } from 'react-router-dom';
                   </FormControl>
               <FormControl id="email" >
                 <FormLabel> Work Email</FormLabel>
-                <Input type="email" name="email" isRequired="true" onChange={handleChange} />
+                <Input type="email" name="email" onChange={handleChange} />
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" name="password"  isRequired="true" onChange={handleChange}/>
+                <Input type="password" name="password"  onChange={handleChange}/>
               </FormControl>
            
               <Stack spacing={10}>
