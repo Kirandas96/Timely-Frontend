@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
   
   export default function SimpleCard() {
     const [user, setUser] = useState({})
+    const [msg,setMsg]=useState("")
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -35,7 +36,7 @@ import { useNavigate } from 'react-router-dom';
     const handleSubmit = () => {
 
         let payload = JSON.stringify(user)
-        fetch("https://evening-castle-55317.herokuapp.com/auth/login", {
+        fetch("https://timelybackend.herokuapp.com/auth/login", {
             headers : {
                 "Content-Type" : "application/json"
             },
@@ -44,8 +45,14 @@ import { useNavigate } from 'react-router-dom';
         })
         .then((res) => res.json())
         .then((res) => {
-                localStorage.setItem("userid", JSON.stringify(res._id))
-                navigate("/dashboard")
+          console.log(res);
+          if(res.message=="login successfull"){
+              localStorage.setItem("userid", JSON.stringify(res._id))
+              navigate("/dashboard")
+          }
+          else{
+            setMsg(res.message)
+          }     
         })
         .catch((err) => console.log(err))
     }
@@ -63,7 +70,7 @@ import { useNavigate } from 'react-router-dom';
           <Stack align={'center'}>
             <Heading fontSize={'5xl'} color={"grey"}>Login to Timely</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
-            Register here <Link color={'green.400'}> Sign Up</Link> ✌️
+            Register here <Link href="/freetrial" color={'green.400'}> Sign Up</Link> ✌️
             </Text>
           </Stack>
           <Box 
@@ -85,7 +92,10 @@ import { useNavigate } from 'react-router-dom';
                 <FormLabel> Work Email</FormLabel>
                 <Input type="email" name="email" isRequired="true" onChange={handleChange} />
               </FormControl>
-           
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input type="password" name="password"  isRequired="true" onChange={handleChange}/>
+              </FormControl>
            
               <Stack spacing={10}>
               {/* <Stack align={'center'}>
@@ -94,6 +104,7 @@ import { useNavigate } from 'react-router-dom';
             By signing up you agree to the <Link color={'green.400'}> Terms of Service.</Link> 
             </Text>
           </Stack> */}
+          <Text>{msg}</Text>
                 <Button onClick={handleSubmit}
                   bg={'blue.400'}
                   color={'white'}

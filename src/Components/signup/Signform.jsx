@@ -22,6 +22,7 @@ import {
   export default function SimpleCard() {
 
     const [user, setUser] = useState({})
+    const [msg,setMsg]=useState("")
     const navigate = useNavigate()
     
      const handlechange = (e) => {
@@ -34,7 +35,7 @@ import {
     
      const handleSubmit = () => {
         let payload = JSON.stringify(user)
-        fetch("https://evening-castle-55317.herokuapp.com/auth/signup", {
+        fetch("https://timelybackend.herokuapp.com/auth/signup", {
             headers : {
                 "Content-Type" : "application/json"
             },
@@ -42,7 +43,15 @@ import {
             body : payload
         })
         .then((res) => res.json())
-        .then((res) => navigate('/welcome'))
+        .then((res) => {
+          if(res.message=="you are registered with this email"){
+            setMsg(res.message)
+          }
+          else{
+            navigate('/welcome')
+          }
+          
+        })
         .catch((err) => console.log(err))
     }
 
@@ -57,7 +66,7 @@ import {
           <Stack align={'center'}>
             <Heading fontSize={'5xl'} color={"grey"}>Sign up to Timely</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
-            Already have an account? <Link color={'green.400'}> Log In</Link> ✌️
+            Already have an account? <Link href="/login" color={'green.400'}> Log In</Link> ✌️
             </Text>
           </Stack>
           <Box 
@@ -94,6 +103,7 @@ import {
             By signing up you agree to the <Link color={'green.400'}> Terms of Service.</Link> 
             </Text>
           </Stack>
+          <Text>{msg}</Text>
                 <Button  onClick={handleSubmit}
                   bg={'blue.400'}
                   color={'white'}
