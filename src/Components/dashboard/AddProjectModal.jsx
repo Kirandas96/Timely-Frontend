@@ -35,7 +35,7 @@ export function AddProjectModal({handleTasks}) {
     }
 
     useEffect(()=>{
-      axios.get("https://evening-castle-55317.herokuapp.com/user/projects").then((res)=>setProjects(res.data))
+      axios.get("https://timelybackend.herokuapp.com/user/projects").then((res)=>setProjects(res.data))
     },[])
     return (
       <>
