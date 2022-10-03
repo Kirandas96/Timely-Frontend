@@ -36,6 +36,7 @@ import { useNavigate } from 'react-router-dom';
     const handleSubmit = () => {
 
         let payload = JSON.stringify(user)
+        
         fetch("https://timelybackend.herokuapp.com/auth/login", {
             headers : {
                 "Content-Type" : "application/json"
@@ -47,7 +48,15 @@ import { useNavigate } from 'react-router-dom';
         .then((res) => {
           console.log(res);
           if(res.message=="login successfull"){
-              localStorage.setItem("userid", JSON.stringify(res._id))
+              localStorage.setItem("userid", JSON.stringify(res.token))
+              fetch("http://localhost:5000/user/projects", {
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization": `Bearer ${res.token}` 
+            },
+            method : 'POST',
+            body : payload
+        })
               navigate("/dashboard")
           }
           else{
