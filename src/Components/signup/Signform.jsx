@@ -4,7 +4,6 @@ import {
     FormControl,
     FormLabel,
     Input,
-    Checkbox,
     Stack,
     Link,
     Button,
@@ -17,6 +16,7 @@ import {
   import style from "./signup.module.css"
   import { useState } from 'react';
  import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
   
   export default function SimpleCard() {
@@ -34,15 +34,8 @@ import {
     }
     
      const handleSubmit = () => {
-        let payload = JSON.stringify(user)
-        fetch("https://timelybackend.herokuapp.com/auth/signup", {
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            method : 'POST',
-            body : payload
-        })
-        .then((res) => res.json())
+
+        axios.post("https://timelybackend.herokuapp.com/auth/signup",user)
         .then((res) => {
           if(res.message=="you are registered with this email"){
             setMsg(res.message)

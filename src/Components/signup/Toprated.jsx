@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 
 import SimpleCard from './Signform'
 import style from "./signup.module.css"
