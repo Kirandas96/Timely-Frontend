@@ -35,18 +35,9 @@ import { useNavigate } from 'react-router-dom';
 
     const handleSubmit = () => {
 
-        let payload = JSON.stringify(user)
-        
-        fetch("https://timelybackend.herokuapp.com/auth/login", {
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            method : 'POST',
-            body : payload
-        })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res);
+      axios.post("https://timelybackend.herokuapp.com/auth/login",user)
+      .then((res)=> {
+          // console.log(res);
           if(res.message=="login successfull"){
               navigate("/dashboard")
           }
