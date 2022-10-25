@@ -15,6 +15,7 @@ import img1 from "../Images/img1.jpg";
 import img2 from "../Images/img2.jpg";
 
 const HomePart1 = () => {
+  
   return (
     <div>
       <div className={styles.home}>

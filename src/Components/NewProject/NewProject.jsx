@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import {
     Box,
     Button,
@@ -47,7 +48,6 @@ export const NewProject = () => {
     const [colorData, setColorData] = useState(colors)
     const [singColor, setSingColor] = useState("#e57373");
     const [clientName, setClientName] = useState("")
-    const userId = JSON.parse(localStorage.getItem("userId"))
     const navigate=useNavigate();
 
     useEffect(() => {
@@ -70,15 +70,19 @@ export const NewProject = () => {
         newProject.singColor=singColor
         console.log(newProject);
         let payload=JSON.stringify(newProject);
-        fetch(`https://evening-castle-55317.herokuapp.com/user/62da35e81f868324ad0dcc06/projects`,{
+        let token=localStorage.getItem("userid")
+        let t=JSON.parse(token)
+        // let userId=t
+        console.log(t);
+        axios.post(`https://timelybackend.herokuapp.com/user/projects`,
+        payload,
+        {
             headers:{
-                "content-Type":"Application/json"
-            },
-            method:"POST",
-            body: payload
+                "content-Type":"Application/json",
+                "Authorization": `Bearer ${t}`
+            }
         })
-        .then((res)=>res.json())
-        .then((data)=>navigate("/dashboard/projects"))
+        .then((res)=>navigate("/dashboard/projects"))
         .catch((err)=>console.log(err));
     }
 

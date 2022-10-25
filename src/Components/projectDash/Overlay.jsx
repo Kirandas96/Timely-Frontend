@@ -38,7 +38,7 @@ export function BackdropExample({ele,getData}) {
   );
   function handleDelete() {
     axios.delete(
-      `https://evening-castle-55317.herokuapp.com/user/:${projectId}`
+      `https://timelybackend.herokuapp.com/user/:${projectId}`
     ).then((res) =>{
       getData()
     })

@@ -48,15 +48,6 @@ import { useNavigate } from 'react-router-dom';
         .then((res) => {
           console.log(res);
           if(res.message=="login successfull"){
-              localStorage.setItem("userid", JSON.stringify(res.token))
-              fetch("http://localhost:5000/user/projects", {
-            headers : {
-                "Content-Type" : "application/json",
-                "Authorization": `Bearer ${res.token}` 
-            },
-            method : 'POST',
-            body : payload
-        })
               navigate("/dashboard")
           }
           else{

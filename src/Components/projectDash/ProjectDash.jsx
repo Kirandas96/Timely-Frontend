@@ -50,7 +50,7 @@ console.log(e)
 function handleEdit(ele) {
   const projectId= ele._id
   axios.patch(
-    `https://evening-castle-55317.herokuapp.com/user/:${projectId}`
+    `https://timelybackend.herokuapp.com/user/:${projectId}`
   );
 }
 function ProjectDash() {
@@ -61,7 +61,7 @@ function ProjectDash() {
   }, []);
 
   const getData = () => {
-    axios.get("https://evening-castle-55317.herokuapp.com/user/projects").then((res) => {
+    axios.get("https://timelybackend.herokuapp.com/user/projects").then((res) => {
       console.log(res.data);
       const data = res.data;
       setProjects(data);
